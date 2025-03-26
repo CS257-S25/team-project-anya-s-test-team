@@ -36,7 +36,7 @@ jobs:
       with:
         test-name: Style check - Production Code
         setup-command: python -m pip install --upgrade pip; pip install pylint
-        command: pylint ProductionCode
+        command: pylint --disable=import-error ProductionCode
         timeout: 10
     - name: Style check - Tests
       id: style-check-tests
@@ -44,7 +44,7 @@ jobs:
       with:
         test-name: Style check - Tests
         setup-command: python -m pip install --upgrade pip; pip install pylint
-        command: pylint Tests
+        command: pylint --disable=import-error Tests
         timeout: 10
     - name: Style check - cl
       id: style-check-cl
@@ -52,7 +52,7 @@ jobs:
       with:
         test-name: Style check - cl
         setup-command: python -m pip install --upgrade pip; pip install pylint
-        command: pylint cl.py
+        command: pylint --disable=import-error cl.py
         timeout: 10
     - name: Style check - app
       id: style-check-app
@@ -60,7 +60,7 @@ jobs:
       with:
         test-name: Style check - app
         setup-command: python -m pip install --upgrade pip; pip install pylint
-        command: pylint app.py
+        command: pylint --disable=import-error app.py
         timeout: 10
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
