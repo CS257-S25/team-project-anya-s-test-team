@@ -46,6 +46,22 @@ jobs:
         setup-command: python -m pip install --upgrade pip; pip install pylint
         command: pylint Tests
         timeout: 10
+    - name: Style check - cl
+      id: style-check-cl
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Style check - cl
+        setup-command: python -m pip install --upgrade pip; pip install pylint
+        command: pylint cl.py
+        timeout: 10
+    - name: Style check - app
+      id: style-check-app
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Style check - app
+        setup-command: python -m pip install --upgrade pip; pip install pylint
+        command: pylint app.py
+        timeout: 10
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
@@ -53,5 +69,7 @@ jobs:
         COVERAGE-REPORT_RESULTS: "${{steps.coverage-report.outputs.result}}"
         STYLE-CHECK-PRODUCTION-CODE_RESULTS: "${{steps.style-check-production-code.outputs.result}}"
         STYLE-CHECK-TESTS_RESULTS: "${{steps.style-check-tests.outputs.result}}"
+        STYLE-CHECK-CL_RESULTS: "${{steps.style-check-cl.outputs.result}}"
+        STYLE-CHECK-APP_RESULTS: "${{steps.style-check-app.outputs.result}}"
       with:
-        runners: run-test-suite,coverage-report,style-check-production-code,style-check-tests
+        runners: run-test-suite,coverage-report,style-check-production-code,style-check-tests,style-check-cl,style-check-app
