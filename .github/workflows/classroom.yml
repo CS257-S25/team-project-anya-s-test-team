@@ -27,8 +27,8 @@ jobs:
       with:
         test-name: Coverage report
         setup-command: python -m pip install --upgrade pip; pip install coverage
-        command: python3 -m coverage run --source ProductionCode -m unittest discover
-          Tests; python3 -m coverage report -m
+        command: python3 -m coverage run --source ProductionCode,app,cl -m unittest
+          discover Tests; python3 -m coverage report -m
         timeout: 10
     - name: Style check - Production Code
       id: style-check-production-code
