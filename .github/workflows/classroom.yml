@@ -18,7 +18,7 @@ jobs:
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: Run test suite
-        setup-command: ''
+        setup-command: python -m pip install --upgrade pip; pip install flask
         command: python3 -m unittest discover -s Tests
         timeout: 10
     - name: Coverage report
@@ -26,7 +26,8 @@ jobs:
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: Coverage report
-        setup-command: python -m pip install --upgrade pip; pip install coverage
+        setup-command: python -m pip install --upgrade pip; pip install coverage;
+          pip install flask
         command: python3 -m coverage run --source ProductionCode,app,cl -m unittest
           discover Tests; python3 -m coverage report -m
         timeout: 10
