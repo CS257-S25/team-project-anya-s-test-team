@@ -1,5 +1,5 @@
 import psycopg2
-import ProductionCode.psqlConfig as config
+import ProductionCode.psql_config as config
 
 class DataSource:
 
@@ -15,10 +15,10 @@ class DataSource:
         try:
             # Connect to the PostgreSQL database
             conn = psycopg2.connect(
-                host=config.host,
-                database=config.database,
-                user=config.user,
-                password=config.password
+                host=config.HOST,
+                database=config.DATABASE,
+                user=config.USER,
+                password=config.PASSWORD
             )
         except Exception as e:
             print(f"Error connecting to the database: {e}")
