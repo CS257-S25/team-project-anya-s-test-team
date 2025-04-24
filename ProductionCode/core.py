@@ -48,6 +48,7 @@ class Core:
         :param stat: The stat to use
         :param count: The number of Pokemon to display
         :return: A list of Pokemon
+        more docs
         ''' 
 
         result = self.data_source.get_pokemon_by_stat(desired_stat, count)
