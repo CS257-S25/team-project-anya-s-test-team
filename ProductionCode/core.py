@@ -16,45 +16,60 @@ Follows the function design principles and has generally good style
 Has documentation through docstrings and in-line comments where appropriate
 Follows the recommended Python style'''
 
-##open the data file Data/Pokemon.csv
-with open("Data/Pokemon.csv", "r", encoding="utf-8") as data_file:
-    column_names = data_file.readline().strip().split(",")
-    data = data_file.readlines()
 
+from ProductionCode.datasource import DataSource
 
-def get_column_names():
+class Core:
     '''
-    Returns the column names for the data
-    :return: The column names
+    Core class for the project
+    This class contains the functions that will be used by the command line interface
     '''
-    return column_names
+    def __init__(self):
+        '''
+        Initializes the core class
+        '''
 
-def get_pokemon_by_stat(desired_stat, count):
-    '''
-    Returns the top number of Pokemon by the given stat
-    :param stat: The stat to use
-    :param count: The number of Pokemon to display
-    :return: A list of Pokemon
-    '''
+        #initialize the column names
+        self.column_names = "#,Name,Type 1,Type 2,Total,HP,Attack,\
+    Defense,Sp. Atk,Sp. Def,Speed,Generation,Legendary".split(",")
+        self.data_source = DataSource()
 
-    #sort the data by the given stat
-    stat_index = column_names.index(desired_stat)
-    data.sort(key=lambda x: int(x.split(",")[stat_index]), reverse=True)
 
-    #return the top number of Pokemon
-    return data[:count]
+    def get_column_names(self):
+        '''
+        Returns the column names for the data
+        :return: The column names
+        '''
+        return self.column_names
 
-def get_pokemon_by_name(name):
-    '''
-    Returns the Pokemon with the given name
-    :param name: The name of the Pokemon
-    :return: The Pokemon
-    '''
+    def get_pokemon_by_stat(self,desired_stat, count):
+        '''
+        Returns the top number of Pokemon by the given stat
+        :param stat: The stat to use
+        :param count: The number of Pokemon to display
+        :return: A list of Pokemon
+        ''' 
 
-    #find the Pokemon with the given name
-    for a_pokemon in data:
-        pokemon_data = a_pokemon.strip().split(",")
-        if pokemon_data[1] == name:
-            return a_pokemon
+        result = self.data_source.get_pokemon_by_stat(desired_stat, count)
+        if result:
+            return [",".join(map(str, pokemon)) for pokemon in result]
+        else:
+            return []
+        # #sort the data by the given stat
+        # stat_index = column_names.index(desired_stat)
+        # data.sort(key=lambda x: int(x.split(",")[stat_index]), reverse=True)
 
-    return None
+        # #return the top number of Pokemon
+        # return data[:count]
+
+    def get_pokemon_by_name(self,name):
+        '''
+        Returns the Pokemon with the given name
+        :param name: The name of the Pokemon
+        :return: The Pokemon
+        '''
+        result = self.data_source.get_pokemon_by_name(name)
+        if result:
+            return ",".join(map(str, result))
+        else:
+            return None
