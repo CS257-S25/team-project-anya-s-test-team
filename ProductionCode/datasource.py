@@ -20,7 +20,7 @@ class DataSource:
                 user=config.USER,
                 password=config.PASSWORD
             )
-        except Exception as e:
+        except psycopg2.Error as e:
             print(f"Error connecting to the database: {e}")
             return
         # Create a cursor object
