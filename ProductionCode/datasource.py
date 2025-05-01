@@ -1,5 +1,6 @@
 import psycopg2
 import ProductionCode.psql_config as config
+import sys
 
 class DataSource:
 
@@ -22,7 +23,7 @@ class DataSource:
             )
         except psycopg2.Error as e:
             print(f"Error connecting to the database: {e}")
-            return
+            sys.exit(1)
         # Create a cursor object
         self.connection = conn
         self.cursor = self.connection.cursor()
