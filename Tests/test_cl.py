@@ -83,6 +83,9 @@ class TestCommandLine(unittest.TestCase):
         '''
         #create a mock connection and cursor
         mock_connect.return_value = self.mock_conn
+        self.mock_cursor.fetchall.return_value = [
+            (2, "Ivysaur", "Grass", "Poison", 60, 62, 63, 80, 80, 60, 1, False)
+        ]
         mock_get_column_names.return_value = ["#", "Name", "Type 1", "Type 2"]
         test_cl = CL()
         sys.stdout = io.StringIO()
