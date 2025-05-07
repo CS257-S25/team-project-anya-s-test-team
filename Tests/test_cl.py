@@ -75,13 +75,14 @@ class TestCommandLine(unittest.TestCase):
         self.assertEqual(test_core.get_pokemon_by_stat("HP", 1), \
                          ["2,Ivysaur,Grass,Poison,60,62,63,80,80,60,1,False"])
 
-
+    @patch('ProductionCode.datasource.psycopg2.connect')
     @patch('ProductionCode.core.Core.get_column_names')
-    def test_print_pokemon(self, mock_get_column_names):
+    def test_print_pokemon(self, mock_get_column_names, mock_connect):
         '''
         Test print_pokemon
         '''
         #create a mock connection and cursor
+        mock_connect.return_value = self.mock_conn
         mock_get_column_names.return_value = ["#", "Name", "Type 1", "Type 2"]
         test_cl = CL()
         sys.stdout = io.StringIO()
