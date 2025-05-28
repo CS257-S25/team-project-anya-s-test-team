@@ -27,7 +27,7 @@ class TestFlaskApp(unittest.TestCase):
         '''
         Test the index route
         '''
-        # Create a mock connection and cursor
+        # Create a mock connection and cursor 
         mock_connect.return_value = self.mock_conn
         self.mock_cursor.fetchone.return_value = (1, "Bulbasaur", "Grass", "Poison", 45, 49, 49, 65, 65, 45, 1, False)
         response = self.app.get('/')
