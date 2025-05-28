@@ -1,8 +1,9 @@
 import psycopg2
 import ProductionCode.psql_config as config
 import sys
+from ProductionCode.single_meta import SingletonMeta
 
-class DataSource:
+class DataSource(metaclass=SingletonMeta):
 
     def __init__(self):
        self.connect()

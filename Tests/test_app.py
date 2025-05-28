@@ -10,7 +10,7 @@ from ProductionCode.datasource import DataSource
 from app import app
 
 class TestFlaskApp(unittest.TestCase):
-    '''Test class for the Flask app'''
+    '''Test class for the Flask app '''
 
     def setUp(self):
         '''
