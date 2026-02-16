@@ -3,7 +3,6 @@ import ProductionCode.psql_config as config
 #from ProductionCode.single_meta import SingletonMeta
 
 class DataSource:
-    
     def __init__(self, db_url=None):
         # Allow passing a URL for easier testing, or default to config
         self.database_url = db_url or f"postgresql://{config.USER}:{config.PASSWORD}@{config.HOST}:5432/{config.DATABASE}"
