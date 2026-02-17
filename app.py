@@ -21,6 +21,10 @@ def display(name):
         return result
     else:
         return "No pokemon!"
+    
+@app.route('/d3example')
+def display_d3():
+    return render_template('d3_example.html')
 
 
 @app.route('/displayrow')
